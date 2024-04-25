@@ -6,6 +6,8 @@ import torch
 
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import mamba_ssm
+
 
 model = AutoModelForCausalLM.from_pretrained("/ml_workspace/Jamba-v0.1",
                                              trust_remote_code=True,
@@ -45,12 +47,8 @@ def complete(request: Request):
         input_text = request.content
         if input_text is None:
             raise Exception("content is empty")
-        input_ids = tokenizer.encode(input_text, return_tensors="pt").cuda()
         
-        predicted_text = greedy_decoding(input_ids, request.max_tokens)
+        predicted_text = predict_text(input_text, request.max_tokens)
         return {"content": predicted_text}
     except Exception as e:
         return {"error": str(e)}
-        
-
-
