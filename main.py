@@ -2,6 +2,7 @@ from typing import Union
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
+import torch
 
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
