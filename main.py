@@ -13,7 +13,7 @@ model = AutoModelForCausalLM.from_pretrained("/ml_workspace/Jamba-v0.1",
                                              trust_remote_code=True,
                                              torch_dtype=torch.bfloat16,
                                              attn_implementation="flash_attention_2",
-                                             device_map="auto")
+                                             device_map="cuda")
 
 tokenizer = AutoTokenizer.from_pretrained("/ml_workspace/Jamba-v0.1", config = "/ml_workspace/Jamba-v0.1/tokenizer_config.json")
 
